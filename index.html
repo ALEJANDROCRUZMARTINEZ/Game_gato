@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase TicTacToe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+<img src="imagenes/imagen1.jpeg" alt="" sizes="" srcset="">
+<h1>Clase TicTacToe</h1>
+<p>La clase <strong>TicTacToe</strong> es la clase principal del juego. Aquí se encuentra la lógica y la interacción con la interfaz gráfica.</p>
+
+<h2>1. Constructor __init__</h2>
+<ul>
+    <li><strong>self.root:</strong> Almacena la instancia raíz de Tkinter (la ventana principal del juego).</li>
+    <li><strong>self.root.title("Tic Tac Toe"):</strong> Define el título de la ventana del juego como "Tic Tac Toe".</li>
+    <li><strong>self.current_player = "x":</strong> Inicializa el jugador actual como "x".</li>
+    <li><strong>self.move_count = 0:</strong> Inicializa un contador para llevar la cuenta de los movimientos realizados.</li>
+    <li><strong>self.buttons = []:</strong> Crea una lista para almacenar los botones del juego.</li>
+</ul>
+
+<h3>Creación de los botones del juego:</h3>
+<ul>
+    <li>Un ciclo <strong>for</strong> anidado crea un total de 9 botones (3x3) para la cuadrícula del juego.</li>
+    <li>Cada botón es creado con la función <strong>tk.Button():</strong></li>
+    <ul>
+        <li><strong>text="":</strong> Inicialmente, el botón está vacío.</li>
+        <li><strong>font=('normal', 40):</strong> Define el tamaño y tipo de fuente del texto.</li>
+        <li><strong>width=5, height=2:</strong> Establece el tamaño del botón.</li>
+        <li><strong>command=lambda i=i, j=j: self.on_button_click(i, j):</strong> Asocia una función de devolución de llamada (<strong>self.on_button_click</strong>) a cada botón. Esta función se ejecuta cuando se hace clic en el botón.</li>
+        <li>Cada botón se ubica en la cuadrícula usando <strong>button.grid(row=i, column=j).</strong></li>
+        <li>Los botones se agregan a la lista <strong>self.buttons</strong> para facilitar el acceso.</li>
+    </ul>
+</ul>
+
+<h2>2. Método toggle_player</h2>
+<ul>
+    <li>Cambia el jugador actual entre "x" y "0".</li>
+</ul>
+
+<h2>3. Método on_button_click</h2>
+<ul>
+    <li>Este método se ejecuta cuando se hace clic en un botón del juego.</li>
+    <li>Verifica si el botón seleccionado está vacío (<strong>self.buttons[i][j]["text"] == ""</strong>).</li>
+    <li>Si está vacío, coloca el símbolo del jugador actual en el botón (<strong>self.buttons[i][j]["text"] = self.current_player</strong>).</li>
+    <li>Desactiva el botón para evitar que se vuelva a hacer clic (<strong>self.buttons[i][j]["state"] = "disabled"</strong>).</li>
+    <li>Incrementa el contador de movimientos (<strong>self.move_count += 1</strong>).</li>
+    <li>Verifica si hay un ganador usando <strong>self.check_winner()</strong>.</li>
+    <li>Si no hay un ganador, cambia el jugador actual usando <strong>self.toggle_player()</strong>.</li>
+</ul>
+
+<h2>4. Método check_winner</h2>
+<ul>
+    <li>Define todas las posibles líneas ganadoras del juego: filas, columnas y diagonales.</li>
+    <li>Iteración sobre las líneas para verificar si hay tres símbolos iguales.</li>
+    <li>Si se encuentra una línea ganadora, se llama al método <strong>self.show_winner()</strong> para mostrar un mensaje de victoria.</li>
+    <li>Se devuelve <strong>True</strong> para indicar que el juego ha terminado.</li>
+    <li>Si se han hecho todos los movimientos (<strong>self.move_count == 9</strong>) y no hay un ganador, se muestra un mensaje de empate.</li>
+    <li>Se llama al método <strong>self.reset_game()</strong> para reiniciar el juego.</li>
+    <li>Se devuelve <strong>True</strong> para indicar que el juego ha terminado.</li>
+    <li>Si no hay un ganador y no se han hecho todos los movimientos, se devuelve <strong>False</strong>.</li>
+</ul>
+
+<h2>5. Método show_winner</h2>
+<ul>
+    <li>Muestra un mensaje de victoria con el símbolo del ganador.</li>
+    <li>Reinicia el juego llamando a <strong>self.reset_game()</strong>.</li>
+</ul>
+
+<h2>6. Método reset_game</h2>
+<ul>
+    <li>Reinicia el juego a su estado inicial.</li>
+    <li>Restablece el contador de movimientos (<strong>self.move_count = 0</strong>).</li>
+    <li>Vacía el texto de todos los botones (<strong>button["text"] = ""</strong>).</li>
+    <li>Habilita todos los botones para que se puedan hacer clic de nuevo (<strong>button["state"] = "normal"</strong>).</li>
+</ul>
+
+</body>
+</html>
